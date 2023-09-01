@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    {% for question in questions %}
+
     <p>{{question.title}}</p>
     {{question.question_a}}
     {{question.question_b}}
@@ -16,6 +16,5 @@
     <input type="submit">
     <hr>
 
-    {% endfor %}
 
 {% endblock %}

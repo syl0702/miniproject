@@ -3,17 +3,34 @@ from .models import Question
 from .forms import QuestionForm, CommentForm
 # Create your views here.
 
+def start(request):
+    return render(request, 'start.html')
+
+
 def index(request):
     questions = Question.objects.all()
+    
+    context = {
+        'questions':questions,
+    }
+
+    return render(request, 'index.html', context)
+
+
+
+def detail(request, id):
+    question = Question.objects.get(id=id)
 
     comment_form = CommentForm()
 
     context = {
-        'questions': questions,
+        'question': question,
         'comment_form': comment_form,
     }
 
-    return render(request, 'index.html', context)
+    return render(request, 'detail.html', context)
+
+
 
 def create(request):
     if request.method == 'POST':
@@ -41,3 +58,10 @@ def comment_create(request, question_id):
         comment.save()
 
         return redirect('questions:index')
+
+
+# def choice(request, question_id):
+#     user = request.user
+#     question = Question.objects.get(id=question_id)
+
+#     if question_a = 
